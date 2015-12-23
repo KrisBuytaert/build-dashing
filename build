@@ -1,3 +1,4 @@
+rm -rf package-scripts/*.rpm 
 cd centos
 docker build -t dashing/centos7 .
 cd ..
@@ -11,7 +12,7 @@ cd ruby21
 docker build -t dashing/ruby21 .
 cd ..
 
-docker run -v=/home/src/dashing-docker/package-scripts:/scripts dashing/ruby21  /scripts/packageruby
+#docker run -v=/home/src/dashing-docker/package-scripts:/scripts dashing/ruby21  /scripts/packageruby
 
 cd dashing
 docker build -t dashing/dashing .
