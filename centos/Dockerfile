@@ -15,7 +15,7 @@ RUN yum install -y epel-release ruby-devel gcc rsync postgresql-devel rpm-build 
 RUN gem install fpm
 
 
-# RUN sed -i -e '/pam_loginuid\.so/ d' /etc/pam.d/sshd
+RUN sed -i -e '/pam_loginuid\.so/ d' /etc/pam.d/sshd
 
 EXPOSE 22
 CMD /sbin/init

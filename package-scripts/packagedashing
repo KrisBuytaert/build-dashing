@@ -1,5 +1,5 @@
 #!/bin/bash
 cd /scripts
-/usr/local/bin/fpm -s dir -t rpm -n dashing -v 1.3.4  /usr/local/rvm
-/usr/local/bin/fpm -s dir -t rpm -n dashing-dashboard -v 1.3.4  /opt/dashing/
+/usr/local/bin/fpm -s dir -t rpm -n rvm-dashing -v 1.3.4  /usr/local/rvm
+#/usr/local/bin/fpm -s dir -t rpm -n dashing-dashboard -v 1.3.4  /opt/dashing/
 

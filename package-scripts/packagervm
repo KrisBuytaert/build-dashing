@@ -1,4 +1,4 @@
 #!/bin/bash
 cd /scripts
-/usr/local/bin/fpm -s dir -t rpm -n rvm -v 1.26.11  /usr/local/rvm 
+/usr/local/bin/fpm -s dir -t rpm -n rvm -v 1.27.0 /usr/local/rvm 
 
