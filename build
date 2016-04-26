@@ -21,4 +21,4 @@ cd ..
 
 docker run -v=/home/src/dashing-docker/package-scripts:/scripts dashing/dashing  /scripts/packagedashing
 
-docker run -v=/home/src/dashing-docker/package-scripts:/scripts dashing/dashing  /scripts/packagedashboard
+docker run -v=/home/src/dashing-docker/package-scripts:/scripts  -v=/home/src/dashing-docker/dashboards:/dashboards dashing/dashing  /scripts/packagedashboard

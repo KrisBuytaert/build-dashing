@@ -1,4 +1,11 @@
 #!/bin/bash
 cd /scripts
+. ./rvm.sh
+cd /opt/dashing/dashboard
+rsync -av /dashboards/ok-test/ . 
+rvm use 2.1.8 
+bundle install
+cd /scripts
+rvm use system
 /usr/local/bin/fpm -s dir -t rpm -n dashing-dashboard -v 0.98 /opt/dashing/dashboard
 
