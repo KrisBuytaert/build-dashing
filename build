@@ -1,5 +1,4 @@
 #!/bin/bash 
-alias docker="docker -H localhost:4243"
 rm -rf package-scripts/*.rpm 
 cd centos
 docker build -t dashing/centos7 .
@@ -9,18 +8,18 @@ cd rvm
 docker build -t dashing/rvm .
 cd ..
 
-docker run -v=/home/src/dashing-docker/package-scripts:/scripts dashing/rvm  /scripts/packagervm
+docker run -v=`pwd`/package-scripts:/scripts dashing/rvm  /scripts/packagervm
 
 cd ruby21
 docker build -t dashing/ruby21 .
 cd ..
 
-docker run -v=/home/src/dashing-docker/package-scripts:/scripts dashing/ruby21  /scripts/packageruby
+docker run -v=`pwd`/package-scripts:/scripts dashing/ruby21  /scripts/packageruby
 
 cd dashing
 docker build -t dashing/dashing .
 cd ..
 
-docker run -v=/home/src/dashing-docker/package-scripts:/scripts dashing/dashing  /scripts/packagedashing
+docker run -v=`pwd`/package-scripts:/scripts dashing/dashing  /scripts/packagedashing
 
-docker run -v=/home/src/dashing-docker/package-scripts:/scripts  -v=/home/src/dashing-docker/dashboards:/dashboards dashing/dashing  /scripts/packagedashboard
+docker run -v=`pwd`/package-scripts:/scripts  -v=`pwd`/dashboards:/dashboards dashing/dashing  /scripts/packagedashboard
