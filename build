@@ -10,27 +10,34 @@ else
 fi
 rm -rf package-scripts/*.rpm 
 
-
+echo "--- Building custom CentOS Container ---"
 cd centos
 $docker_cmd build $docker_buildarg -t dashing/centos7 .
 cd ..
 
+echo "--- Building Container with RVM ---"
 cd rvm
 $docker_cmd build $docker_buildarg -t dashing/rvm .
 cd ..
 
+echo "--- Packaging  RVM ---"
 $docker_cmd run $docker_runarg -v=`pwd`/package-scripts:/scripts dashing/rvm  /scripts/packagervm
 
+echo "--- Building Container with Ruby 2.1 in RVM ---"
 cd ruby21
 $docker_cmd build $docker_buildarg -t dashing/ruby21 .
 cd ..
 
+echo "--- Packaging Ruby 2.1 in  RVM ---"
 $docker_cmd run $docker_runarg -v=`pwd`/package-scripts:/scripts dashing/ruby21  /scripts/packageruby
 
+echo "--- Building Container with Dashing on Ruby 2.1 in RVM ---"
 cd dashing
 $docker_cmd build $docker_buildarg -t dashing/dashing .
 cd ..
 
+echo "--- Packaging Dashing in Ruby 2.1 in  RVM ---"
 $docker_cmd run $docker_runarg -v=`pwd`/package-scripts:/scripts dashing/dashing  /scripts/packagedashing
 
+echo "--- Packaging The Dashingboards for Dashing  in Ruby 2.1 in  RVM ---"
 $docker_cmd run $docker_runarg -v=`pwd`/package-scripts:/scripts  -v=`pwd`/dashboards:/dashboards dashing/dashing  /scripts/packagedashboard
