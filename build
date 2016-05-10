@@ -1,32 +1,34 @@
 #!/bin/bash
 set -x
 
+docker_cmd=docker
 if [ -z ${http_proxy+x} ]; then
-    docker_cmd=docker
+    docker_params=""
 else
-    docker_cmd="docker -e http_proxy=$http_proxy"
+    docker_runarg="-e http_proxy=$http_proxy"
+    docker_buildarg="--build-arg=http_proxy=$http_proxy"
 fi
 rm -rf package-scripts/*.rpm 
 cd centos
-$docker_cmd build -t dashing/centos7 .
+$docker_cmd build $docker_buildarg -t dashing/centos7 .
 cd ..
 
 cd rvm
-$docker_cmd build -t dashing/rvm .
+$docker_cmd build $docker_buildarg -t dashing/rvm .
 cd ..
 
-$docker_cmd run -v=`pwd`/package-scripts:/scripts dashing/rvm  /scripts/packagervm
+$docker_cmd run $docker_runarg -v=`pwd`/package-scripts:/scripts dashing/rvm  /scripts/packagervm
 
 cd ruby21
-$docker_cmd build -t dashing/ruby21 .
+$docker_cmd build $docker_buildarg -t dashing/ruby21 .
 cd ..
 
-$docker_cmd run -v=`pwd`/package-scripts:/scripts dashing/ruby21  /scripts/packageruby
+$docker_cmd run $docker_runarg -v=`pwd`/package-scripts:/scripts dashing/ruby21  /scripts/packageruby
 
 cd dashing
-$docker_cmd build -t dashing/dashing .
+$docker_cmd build $docker_buildarg -t dashing/dashing .
 cd ..
 
-$docker_cmd run -v=`pwd`/package-scripts:/scripts dashing/dashing  /scripts/packagedashing
+$docker_cmd run $docker_runarg -v=`pwd`/package-scripts:/scripts dashing/dashing  /scripts/packagedashing
 
-$docker_cmd run -v=`pwd`/package-scripts:/scripts  -v=`pwd`/dashboards:/dashboards dashing/dashing  /scripts/packagedashboard
+$docker_cmd run $docker_runarg -v=`pwd`/package-scripts:/scripts  -v=`pwd`/dashboards:/dashboards dashing/dashing  /scripts/packagedashboard
