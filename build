@@ -4,7 +4,7 @@ set -x
 if [ -z ${http_proxy+x} ]; then
     docker_cmd=docker
 else
-    docker_cmd=docker -e http_proxy=$http_proxy
+    docker_cmd="docker -e http_proxy=$http_proxy"
 fi
 rm -rf package-scripts/*.rpm 
 cd centos
