@@ -6,7 +6,7 @@ if [ -z ${http_proxy+x} ]; then
     docker_params=""
 else
     docker_runarg="-e http_proxy=$http_proxy,https_proxy=$http_proxy"
-    docker_buildarg="--build-arg [http_proxy=$http_proxy,https_proxy=$http_proxy]"
+    docker_buildarg="--build-arg http_proxy=$http_proxy  --build-arg https_proxy=$http_proxy"
 fi
 rm -rf package-scripts/*.rpm 
 
