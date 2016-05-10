@@ -2,8 +2,6 @@ FROM dashing/ruby21
 
 MAINTAINER krisbuytaert  "kris@inuits.eu"
 
-ARG http_proxy
-ENV http_proxy ${http_proxy}
 
 
 RUN yum -y install nodejs
