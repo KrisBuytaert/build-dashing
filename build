@@ -6,9 +6,11 @@ if [ -z ${http_proxy+x} ]; then
     docker_params=""
 else
     docker_runarg="-e http_proxy=$http_proxy,https_proxy=$http_proxy"
-    docker_buildarg="--build-arg [http_proxy=$http_proxy ,https_proxy=$http_prox]"
+    docker_buildarg="--build-arg [http_proxy=$http_proxy,https_proxy=$http_proxy]"
 fi
 rm -rf package-scripts/*.rpm 
+
+
 cd centos
 $docker_cmd build $docker_buildarg -t dashing/centos7 .
 cd ..
