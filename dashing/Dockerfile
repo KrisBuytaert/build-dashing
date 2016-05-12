@@ -12,5 +12,7 @@ EXPOSE 3030
 
 
 WORKDIR  /opt/dashing/dashboard
+RUN /usr/bin/rm -rf /opt/dashing/dashbooard/jobs/*
+
 
 CMD /bin/bash -l -c "rvm use 2.1.8 && dashing start"
